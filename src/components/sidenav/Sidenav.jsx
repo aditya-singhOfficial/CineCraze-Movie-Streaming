@@ -9,8 +9,8 @@ const Sidenav = () => {
         <i class="ri-tv-fill text-[#6556CD] mr-2"></i>
         <span>CineCraze</span>
       </h2>
-      <nav className={`flex flex-col gap-3 text-md mt-10 mb-2`}>
-        <h2 className={`text-xl`}>New Feeds</h2>
+      <nav className={`flex flex-col text-zinc-400 gap-3 text-md mt-10 mb-2`}>
+        <h2 className={`text-xl text-white`}>New Feeds</h2>
         <Link
           className={` hover:bg-[#6556CD] duration-200 p-4 hover:text-white rounded-lg`}
         >
@@ -38,8 +38,8 @@ const Sidenav = () => {
         </Link>
       </nav>
       <hr className={`border-none bg-zinc-600 h-px`} />
-      <nav className={`flex flex-col gap-2 text-md mt-5`}>
-        <h2 className={`text-xl`}>Website Information</h2>
+      <nav className={`flex text-zinc-400 flex-col gap-2 text-md mt-5`}>
+        <h2 className={`text-xl text-white`}>Website Information</h2>
         <Link
           className={` hover:bg-[#6556CD] duration-200 p-4 hover:text-white rounded-lg`}
         >
