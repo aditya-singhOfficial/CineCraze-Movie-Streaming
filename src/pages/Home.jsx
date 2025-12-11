@@ -4,6 +4,7 @@ import Sidenav from "../components/sidenav/Sidenav";
 import Topnav from "../components/topnav/Topnav";
 import api from "../utils/axios";
 import Trendingcards from "../components/trendingcards/Trendingcards";
+import BouncingLoader from "../components/loader/BouncingLoader";
 
 const Home = () => {
   document.title = "CineCraze | Home";
@@ -45,7 +46,7 @@ const Home = () => {
       </div>
     </>
   ) : (
-    <h1>Loading.....</h1>
+    <BouncingLoader />
   );
 };
 
