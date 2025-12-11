@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 const Header = ({ data }) => {
-  console.log(data);
   return (
     <div
       style={{
@@ -19,9 +18,9 @@ const Header = ({ data }) => {
         <Link className="text-blue-500">more</Link>
       </p>
       <p className="text-white">
-        <i class="mr-2 text-yellow-500 ri-megaphone-fill"></i>
-        {data.release_date}
-        <i class="ml-3 mr-2 text-yellow-500 ri-movie-2-ai-fill"></i>
+        <i className="mr-2 text-yellow-500 ri-megaphone-fill"></i>
+        {data.release_date || "Not Available"}
+        <i className="ml-3 mr-2 text-yellow-500 ri-movie-2-ai-fill"></i>
         {data.media_type.toUpperCase()}
       </p>
       <Link className="p-3 text-white font-semibold bg-[#6556CD] rounded">
