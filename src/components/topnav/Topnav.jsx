@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { data, Link } from "react-router-dom";
 import api from "../../utils/axios";
-import noImage from "../../../public/noimage.avif";
+import noImage from "/noimage.avif";
 const Topnav = () => {
   const [query, setQuery] = useState("");
   const [movieSearches, setMovieSearches] = useState(null);
@@ -53,7 +53,7 @@ const Topnav = () => {
           movieSearches.map((item, index) => (
             <Link
               key={item.id}
-              className={`flex p-10 font-semibold border-b-2 border-zinc-200`}
+              className={`flex p-10 font-semibold border-b-2 border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200 duration-200`}
             >
               <img
                 className="h-[10vh] w-[10vh] object-cover rounded mr-5 shadow-lg"
