@@ -8,9 +8,9 @@ import BouncingLoader from "../components/loader/BouncingLoader";
 
 const Home = () => {
   document.title = "CineCraze | Home";
-
   const [backdrop, setBackdrop] = useState(null);
   const [trending, setTrending] = useState(null);
+  const [category, setCategory] = useState("all");
   const getBackdrop = async () => {
     try {
       const { data } = await api.get(`/trending/all/day`);
@@ -25,16 +25,21 @@ const Home = () => {
 
   const getTrending = async () => {
     try {
-      const { data } = await api.get(`/trending/all/day`);
+      const { data } = await api.get(`/trending/${category}/day`);
       setTrending(data.results);
     } catch (error) {
       console.log("Error: ", error);
     }
   };
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+  };
+
   useEffect(() => {
     !backdrop && getBackdrop();
-    !trending && getTrending();
-  }, []);
+    getTrending();
+  }, [category]);
 
   return backdrop && trending ? (
     <>
@@ -42,7 +47,7 @@ const Home = () => {
       <div className={`w-[80%] h-screen overflow-y-auto`}>
         <Topnav />
         <Header data={backdrop} />
-        <Trendingcards data={trending} />
+        <Trendingcards changeCategory={handleCategoryChange} data={trending} />
       </div>
     </>
   ) : (
