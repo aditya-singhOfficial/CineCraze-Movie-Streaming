@@ -1,4 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
 import Dropdown from "../components/dropdown/Dropdown";
 import Topnav from "../components/topnav/Topnav";
 import { useEffect, useState } from "react";
@@ -11,12 +12,12 @@ const Trending = () => {
   const navigate = useNavigate();
   const [category, setCategory] = useState("all");
   const [duration, setDuration] = useState("day");
-  const [trending, setTrending] = useState(null);
+  const [trending, setTrending] = useState([]);
 
   const getTrending = async () => {
     try {
       const { data } = await api.get(`/trending/${category}/${duration}`);
-      setTrending(data.results);
+      setTrending((prev) => [...data.results, ...prev]);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -26,8 +27,8 @@ const Trending = () => {
     getTrending();
   }, [category, duration]);
 
-  return trending ? (
-    <div className="bg-[#1F1E24] w-full h-screen p-4">
+  return trending.length > 0 ? (
+    <div className="bg-[#1F1E24] w-full  p-4">
       <div className="w-full h-[10vh] flex justify-between items-center">
         <div className="flex items-center gap-5 text-white">
           <i
@@ -57,11 +58,18 @@ const Trending = () => {
         </div>
       </div>
 
-      <div className="h-[85vh] flex flex-wrap w-full overflow-y-auto justify-between gap-y-10">
-        {trending.map((item, index) => (
-          <Card key={index} width={"w-[23%]"} height={"h-fit"} item={item} />
-        ))}
-      </div>
+      <InfiniteScroll
+        dataLength={trending.length}
+        next={getTrending}
+        hasMore={true}
+        loader={<h4>Loading...</h4>}
+      >
+        <div className=" bg-[#1F1E24] flex flex-wrap w-full justify-between gap-y-10">
+          {trending.map((item, index) => (
+            <Card key={index} width={"w-[23%]"} height={"h-fit"} item={item} />
+          ))}
+        </div>
+      </InfiniteScroll>
     </div>
   ) : (
     <BouncingLoader />
