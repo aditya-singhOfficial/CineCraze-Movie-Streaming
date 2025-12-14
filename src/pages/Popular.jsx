@@ -8,12 +8,15 @@ import Card from "../components/card/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const Popular = () => {
-  document.title = "CineCraze | Popular";
   const navigate = useNavigate();
   const [category, setCategory] = useState("movie");
   const [popular, setPopular] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  document.title =
+    `CineCraze | Popular ` +
+    category.charAt(0).toUpperCase() +
+    category.slice(1);
   const getPopular = async () => {
     try {
       const { data } = await api.get(`/${category}/popular?page=${page}`);
@@ -41,7 +44,7 @@ const Popular = () => {
     refreshHandler();
   }, [category]);
   return popular.length > 0 ? (
-    <div className="bg-[#1F1E24] w-full  p-4">
+    <div className="bg-[#1F1E24] w-full min-h-screen p-4">
       <div className="w-full h-[10vh] flex justify-between items-center">
         <div className="flex items-center gap-5 text-white">
           <i

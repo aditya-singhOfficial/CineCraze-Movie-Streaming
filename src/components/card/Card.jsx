@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import noimage from "/noimage.avif";
 
 const Card = ({
   item,
@@ -11,9 +12,13 @@ const Card = ({
       <Link className={`${width}  shrink-0 ${height} flex flex-col gap-2`}>
         <img
           className="w-full shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] rounded object-cover"
-          src={`https://image.tmdb.org/t/p/original${
+          src={
             item.poster_path || item.backdrop_path
-          }`}
+              ? `https://image.tmdb.org/t/p/original${
+                  item.poster_path || item.backdrop_path
+                }`
+              : noimage
+          }
           alt=""
         />
         <div className="flex flex-col gap-2 mt-2 p-0.5">

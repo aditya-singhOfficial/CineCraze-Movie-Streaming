@@ -8,20 +8,23 @@ import Card from "../components/card/Card";
 import BouncingLoader from "../components/loader/BouncingLoader";
 
 const Trending = () => {
-  document.title = "CineCraze | Trending";
   const navigate = useNavigate();
   const [category, setCategory] = useState("all");
   const [duration, setDuration] = useState("day");
   const [trending, setTrending] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  document.title = `CineCraze | Trending ${
+    category.charAt(0).toUpperCase() + category.slice(1)
+  }`;
+
   const getTrending = async () => {
     try {
       const { data } = await api.get(
         `/trending/${category}/${duration}?page=${page}`
       );
       console.log(data);
-      
+
       if (data.results.length > 0) {
         console.log("here");
         setPage(page + 1);
@@ -48,7 +51,7 @@ const Trending = () => {
   }, [category, duration]);
 
   return trending.length > 0 ? (
-    <div className="bg-[#1F1E24] w-full  p-4">
+    <div className="bg-[#1F1E24] w-full min-h-screen  p-4">
       <div className="w-full h-[10vh] flex justify-between items-center">
         <div className="flex items-center gap-5 text-white">
           <i
@@ -86,7 +89,13 @@ const Trending = () => {
       >
         <div className=" bg-[#1F1E24] flex flex-wrap w-full justify-between gap-y-10">
           {trending.map((item, index) => (
-            <Card showPara={false} key={index} width={"w-[15%]"} height={"h-fit"} item={item} />
+            <Card
+              showPara={false}
+              key={index}
+              width={"w-[15%]"}
+              height={"h-fit"}
+              item={item}
+            />
           ))}
         </div>
       </InfiniteScroll>
