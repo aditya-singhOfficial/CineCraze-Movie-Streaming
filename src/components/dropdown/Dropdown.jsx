@@ -1,4 +1,4 @@
-const Dropdown = ({ selectOption, changeCategory }) => {
+const Dropdown = ({ selectOption, changeCategory,dropdownName="Filter" }) => {
   return (
     <div className="select">
       <select
@@ -8,7 +8,7 @@ const Dropdown = ({ selectOption, changeCategory }) => {
         onChange={changeCategory}
       >
         <option value="0" disabled>
-          Filter
+          {dropdownName.charAt(0).toUpperCase() + dropdownName.slice(1)}
         </option>
         {selectOption.map((item, index) => (
           <option key={index} value={item}>
