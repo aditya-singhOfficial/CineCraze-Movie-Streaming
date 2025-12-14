@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-const Card = ({ item }) => {
+const Card = ({ item, width = "w-[20%]", height = "h-full" }) => {
   return (
     <>
-      <div className="w-[20%] shrink-0 h-full flex flex-col gap-2">
+      <Link className={`${width} shrink-0 ${height} flex flex-col gap-2`}>
         <img
           className="w-full rounded shadow-lg object-cover"
           src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`}
@@ -15,10 +15,10 @@ const Card = ({ item }) => {
           </h1>
           <p className="text-white">
             {item.overview.slice(0, 45)}....{" "}
-            <Link className="text-blue-500">more</Link>
+            <span className="text-blue-500">more</span>
           </p>
         </div>
-      </div>
+      </Link>
     </>
   );
 };
