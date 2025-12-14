@@ -86,7 +86,7 @@ const Trending = () => {
       >
         <div className=" bg-[#1F1E24] flex flex-wrap w-full justify-between gap-y-10">
           {trending.map((item, index) => (
-            <Card key={index} width={"w-[23%]"} height={"h-fit"} item={item} />
+            <Card showPara={false} key={index} width={"w-[15%]"} height={"h-fit"} item={item} />
           ))}
         </div>
       </InfiniteScroll>
