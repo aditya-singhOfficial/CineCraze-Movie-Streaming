@@ -7,13 +7,12 @@ import BouncingLoader from "../components/loader/BouncingLoader";
 import Card from "../components/card/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 const Movies = () => {
+  document.title = `CineCraze | Movie `;
   const navigate = useNavigate();
   const [category, setCategory] = useState("now_playing");
   const [movie, setMovie] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  document.title =
-    `CineCraze | Movie ` + category.charAt(0).toUpperCase() + category.slice(1);
   const getMovie = async () => {
     try {
       const { data } = await api.get(`/movie/${category}?page=${page}`);
@@ -40,6 +39,7 @@ const Movies = () => {
   useEffect(() => {
     refreshHandler();
   }, [category]);
+
   return movie.length > 0 ? (
     <div className="bg-[#1F1E24] w-full min-h-screen p-4">
       <div className="w-full h-[10vh] flex justify-between items-center">
@@ -48,7 +48,10 @@ const Movies = () => {
             onClick={() => navigate(-1)}
             className="text-2xl hover:scale-110 duration-200 ri-arrow-left-line cursor-pointer"
           ></i>
-          <h2 className="text-2xl ">movies</h2>
+          <h2 className="text-2xl ">
+            movies
+            {<small className="text-sm text-zinc-500 ml-2">({category})</small>}
+          </h2>
         </div>
         <div className="w-[70%]">
           <Topnav />

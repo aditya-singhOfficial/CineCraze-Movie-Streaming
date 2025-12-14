@@ -8,15 +8,13 @@ import Card from "../components/card/Card";
 import BouncingLoader from "../components/loader/BouncingLoader";
 
 const Trending = () => {
+  document.title = `CineCraze | Trending`;
   const navigate = useNavigate();
   const [category, setCategory] = useState("all");
   const [duration, setDuration] = useState("day");
   const [trending, setTrending] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  document.title = `CineCraze | Trending ${
-    category.charAt(0).toUpperCase() + category.slice(1)
-  }`;
 
   const getTrending = async () => {
     try {
@@ -58,7 +56,10 @@ const Trending = () => {
             onClick={() => navigate(-1)}
             className="text-2xl hover:scale-110 duration-200 ri-arrow-left-line cursor-pointer"
           ></i>
-          <h2 className="text-2xl ">Trending</h2>
+          <h2 className="text-2xl ">
+            Trending
+            {<small className="text-sm text-zinc-500 ml-2">({category})</small>}
+          </h2>
         </div>
         <div className="w-[70%]">
           <Topnav />

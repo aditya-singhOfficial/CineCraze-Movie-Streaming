@@ -13,9 +13,9 @@ const Card = ({
         <img
           className="w-full shadow-[8px_17px_38px_2px_rgba(0,0,0,0.5)] rounded object-cover"
           src={
-            item.poster_path || item.backdrop_path
+            item.poster_path || item.backdrop_path || item.profile_path
               ? `https://image.tmdb.org/t/p/original${
-                  item.poster_path || item.backdrop_path
+                  item.poster_path || item.backdrop_path || item.profile_path
                 }`
               : noimage
           }

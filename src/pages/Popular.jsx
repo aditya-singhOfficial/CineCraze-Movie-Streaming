@@ -8,15 +8,12 @@ import Card from "../components/card/Card";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const Popular = () => {
+  document.title = `CineCraze | Popular `;
   const navigate = useNavigate();
   const [category, setCategory] = useState("movie");
   const [popular, setPopular] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  document.title =
-    `CineCraze | Popular ` +
-    category.charAt(0).toUpperCase() +
-    category.slice(1);
   const getPopular = async () => {
     try {
       const { data } = await api.get(`/${category}/popular?page=${page}`);
@@ -51,7 +48,10 @@ const Popular = () => {
             onClick={() => navigate(-1)}
             className="text-2xl hover:scale-110 duration-200 ri-arrow-left-line cursor-pointer"
           ></i>
-          <h2 className="text-2xl ">Popular</h2>
+          <h2 className="text-2xl ">
+            Popular
+            {<small className="text-sm text-zinc-500 ml-2">({category})</small>}
+          </h2>
         </div>
         <div className="w-[70%]">
           <Topnav />
