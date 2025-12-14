@@ -13,18 +13,38 @@ const Trending = () => {
   const [category, setCategory] = useState("all");
   const [duration, setDuration] = useState("day");
   const [trending, setTrending] = useState([]);
-
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const getTrending = async () => {
     try {
-      const { data } = await api.get(`/trending/${category}/${duration}`);
-      setTrending((prev) => [...data.results, ...prev]);
+      const { data } = await api.get(
+        `/trending/${category}/${duration}?page=${page}`
+      );
+      console.log(data);
+      
+      if (data.results.length > 0) {
+        console.log("here");
+        setPage(page + 1);
+        setTrending((prev) => [...prev, ...data.results]);
+      } else {
+        setHasMore(false);
+      }
     } catch (error) {
       console.log("Error: ", error);
     }
   };
 
+  const refreshHandler = () => {
+    if (trending.length === 0) getTrending();
+    else {
+      setTrending([]);
+      setPage(1);
+      getTrending();
+    }
+  };
+
   useEffect(() => {
-    getTrending();
+    refreshHandler();
   }, [category, duration]);
 
   return trending.length > 0 ? (
@@ -61,7 +81,7 @@ const Trending = () => {
       <InfiniteScroll
         dataLength={trending.length}
         next={getTrending}
-        hasMore={true}
+        hasMore={hasMore}
         loader={<h4>Loading...</h4>}
       >
         <div className=" bg-[#1F1E24] flex flex-wrap w-full justify-between gap-y-10">
