@@ -18,7 +18,7 @@ const People = () => {
     try {
       const { data } = await api.get(`/person/${category}?page=${page}`);
       console.log(data);
-      
+
       if (data.results.length > 0) {
         setPage(page + 1);
         setPeople((prev) => [...prev, ...data.results]);
@@ -58,15 +58,7 @@ const People = () => {
         <div className="w-[70%]">
           <Topnav />
         </div>
-        <div className="flex gap-3 w-[26%]">
-          <Dropdown
-            changeCategory={(e) => {
-              setCategory(e.target.value);
-            }}
-            dropdownName={"category"}
-            selectOption={["popular", "top_rated", "upcoming", "now_playing"]}
-          />
-        </div>
+        <div className="flex gap-3 w-[26%]"></div>
       </div>
 
       <InfiniteScroll
